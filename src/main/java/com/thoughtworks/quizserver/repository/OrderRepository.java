@@ -7,6 +7,7 @@ import java.util.*;
 
 public interface OrderRepository extends CrudRepository<OrderDto, Integer> {
     List<OrderDto> findAll();
-
     Optional<OrderDto> findByProdId(int id);
+
+    void deleteId(int id);
 }
