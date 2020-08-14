@@ -28,6 +28,9 @@ public class ProductController {
 
     @PostMapping("/product")
     public ResponseEntity addProductToProRepository(@RequestBody Product product) {
+        if (productService.isProductExist(product.getName())) {
+            return ResponseEntity.badRequest().build();
+        }
         productService.addProductToProRepository(product);
         return ResponseEntity.ok().build();
     }

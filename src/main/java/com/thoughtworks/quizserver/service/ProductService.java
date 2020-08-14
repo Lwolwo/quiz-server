@@ -48,4 +48,8 @@ public class ProductService {
                 .build();
         productRepository.save(productDto);
     }
+
+    public boolean isProductExist(String name) {
+        return productRepository.findByName(name).isPresent();
+    }
 }
