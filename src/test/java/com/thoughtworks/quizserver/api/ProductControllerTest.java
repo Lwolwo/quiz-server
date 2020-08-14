@@ -1,5 +1,6 @@
 package com.thoughtworks.quizserver.api;
 
+import com.fasterxml.jackson.databind.*;
 import com.thoughtworks.quizserver.domain.*;
 import com.thoughtworks.quizserver.domain.Order;
 import com.thoughtworks.quizserver.dto.*;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.web.servlet.*;
 import org.springframework.boot.test.context.*;
+import org.springframework.http.*;
 import org.springframework.test.web.servlet.*;
 
 import static org.hamcrest.Matchers.*;
@@ -52,6 +54,24 @@ public class ProductControllerTest {
         orderRepository.save(orderDto);
         mockMvc
                 .perform(post("/product/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldAddProduct() throws Exception {
+        Product product = Product.builder()
+                .name("可乐")
+                .price(1)
+                .type("1")
+                .picUrl("")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(product);
+
+        mockMvc
+                .perform(post("/product")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 }

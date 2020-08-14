@@ -13,14 +13,17 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/order")
-    public ResponseEntity getProductList() {
+    public ResponseEntity getOrderList() {
         return ResponseEntity.ok(orderService.getOrderList());
     }
 
     @DeleteMapping("/order/{id}")
     public ResponseEntity delete(@PathVariable int id) {
-        orderService.deleteOrderById(id);
-        return ResponseEntity.ok().build();
+        if (orderService.isOrderExist(id)) {
+            orderService.deleteOrderById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 }

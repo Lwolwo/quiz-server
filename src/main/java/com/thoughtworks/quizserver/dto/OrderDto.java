@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "order")
+@Table(name = "myOrder")
 public class OrderDto {
     @Id @GeneratedValue private int id;
     private String name;
@@ -17,4 +17,5 @@ public class OrderDto {
     private String type;
     private int quantity;
     private int prodId;
+
 }

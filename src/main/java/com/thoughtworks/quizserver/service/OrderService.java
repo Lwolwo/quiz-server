@@ -16,6 +16,10 @@ public class OrderService {
     }
 
     public void deleteOrderById(int id) {
-        orderRepository.deleteId(id);
+        orderRepository.deleteById(id);
+    }
+
+    public boolean isOrderExist(int id) {
+        return orderRepository.findById(id).isPresent();
     }
 }

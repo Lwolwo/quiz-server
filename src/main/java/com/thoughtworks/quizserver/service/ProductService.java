@@ -38,4 +38,14 @@ public class ProductService {
                 .build();
         orderRepository.save(orderDto);
     }
+
+    public void addProductToProRepository(Product product) {
+        ProductDto productDto = ProductDto.builder()
+                .name(product.getName())
+                .price(product.getPrice())
+                .type(product.getType())
+                .picUrl(product.getPicUrl())
+                .build();
+        productRepository.save(productDto);
+    }
 }
